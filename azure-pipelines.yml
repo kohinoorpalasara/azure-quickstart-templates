@@ -16,7 +16,7 @@ name: Bicep deploy template
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise Subscription'
+    azureSubscription: 'Visual Studio Enterprise Subscription (3ae616e0-74c6-4ae4-ba1c-798925767c89)'
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
