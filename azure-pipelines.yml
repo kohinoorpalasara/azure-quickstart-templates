@@ -5,14 +5,6 @@ variables:
   templateFile: './main.bicep'
   sourceFolder: 'quickstarts/microsoft.web/webapp-linux-managed-mysql/'
 
-trigger:
-- none
-
-pool:
-  vmImage: $(vmImageName)
-
-name: Bicep deploy template
-
 steps:
 - task: AzureCLI@2
   inputs:
