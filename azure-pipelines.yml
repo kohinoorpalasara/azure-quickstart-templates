@@ -1,7 +1,7 @@
 variables:
   vmImageName: 'ubuntu-latest'
-  resourceGroupName: '<resource-group-name>' # Needs to already exist
-  location: '<your-closest-location>'
+  resourceGroupName: 'rg-kon-network-devops01' # Needs to already exist
+  location: 'Australia East'
   templateFile: './main.bicep'
   sourceFolder: 'quickstarts/microsoft.web/webapp-linux-managed-mysql/'
 
@@ -16,7 +16,7 @@ name: Bicep deploy template
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: '<service-connection-name>'
+    azureSubscription: 'Visual Studio Enterprise Subscription'
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
