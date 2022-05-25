@@ -1,16 +1,27 @@
 variables:
-- task: AzureResourceManagerTemplateDeployment@3
+  vmImageName: 'ubuntu-latest'
+  resourceGroupName: 'rg-kon-network-devops01' # Needs to already exist
+  location: 'Australia East'
+  templateFile: './main.bicep'
+  sourceFolder: 'quickstarts/microsoft.web/webapp-linux-managed-mysql/'
+
+trigger:
+- none
+
+pool:
+  vmImage: $(vmImageName)
+
+name: Bicep deploy template
+
+steps:
+- task: AzureCLI@2
   inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Visual Studio Enterprise Subscription (3ae616e0-74c6-4ae4-ba1c-798925767c89)'
-    subscriptionId: '3ae616e0-74c6-4ae4-ba1c-798925767c89'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'rg-kon-network-devops01'
-    location: 'Australia East'
-    deploymentMode: 'Incremental'
-    vmImageName: 'ubuntu-latest'
-    templateFile: './main.bicep'
-    sourceFolder: 'quickstarts/microsoft.web/webapp-linux-managed-mysql/'
+    azureSubscription: '<service-connection-name>'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az deployment group create --resource-group $(resourceGroupName) --template-file $(sourceFolder)$(templateFile) \
+      --parameters administratorLogin=$(administratorLogin) administratorLoginPassword=$(administratorLoginPassword)
 
 trigger:
 - none
